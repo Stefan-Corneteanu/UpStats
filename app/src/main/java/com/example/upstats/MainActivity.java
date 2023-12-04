@@ -14,7 +14,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SimpleDateFormat sdf;
+    //same format as shown in the activity_main.xml timers
+    private final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private final long addedMillis = 1000;
     private TextView foregroundTimer;
     private TextView backgroundTimer;
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sdf = new SimpleDateFormat("HH:mm:ss"); //same format as shown in the activity_main.xml timers
         setContentView(R.layout.activity_main);
         foregroundTimer = (TextView) findViewById(R.id.ForegroundTime);
         backgroundTimer = (TextView) findViewById(R.id.BackgroundTime);
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     void increaseTime(@NonNull TextView timer){
         try{
             Date time = sdf.parse(timer.getText().toString());
+            assert time != null;
             time.setTime(time.getTime()+addedMillis);
             timer.setText(sdf.format(time));
         }
